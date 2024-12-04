@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'core/theme/app_theme.dart';
+import 'features/auth/screens/role_selection/role_selection_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,27 +13,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Doctor Buddy',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-        useMaterial3: true,
-      ),
-      home: const HomePage(),
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Doctor Buddy'),
-      ),
-      body: const Center(
-        child: Text('Welcome to Doctor Buddy'),
-      ),
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      home: const RoleSelectionScreen(),
     );
   }
 }
