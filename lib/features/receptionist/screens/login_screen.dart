@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/custom_text_field.dart';
+import 'receptionist_main_screen.dart';
 
 class ReceptionistLoginScreen extends StatefulWidget {
   const ReceptionistLoginScreen({super.key});
@@ -36,10 +37,9 @@ class _ReceptionistLoginScreenState extends State<ReceptionistLoginScreen> {
       setState(() {
         _errorMessage = null;
       });
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Login Successful!'),
-          backgroundColor: Colors.green,
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => const ReceptionistMainScreen(),
         ),
       );
     } else {
