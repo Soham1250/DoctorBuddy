@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../core/responsive/responsive_layout.dart';
+import '../../../../core/theme/app_colors.dart';
 import '../../../doctor/screens/doctor_home.dart';
 import '../../../receptionist/screens/login_screen.dart';
 import 'mobile_layout.dart';
@@ -27,7 +28,7 @@ class RoleSelectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.background,
       body: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {

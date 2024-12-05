@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import '../../../core/theme/app_colors.dart';
 
 class CustomTextField extends StatelessWidget {
   final String hint;
-  final bool isPassword;
   final TextEditingController controller;
+  final bool isPassword;
   final bool obscureText;
   final VoidCallback? onToggleVisibility;
 
@@ -19,20 +20,13 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
-      height: 50,
       margin: const EdgeInsets.symmetric(horizontal: 32),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.shade300),
-      ),
       child: TextField(
         controller: controller,
-        obscureText: obscureText,
-        textAlignVertical: TextAlignVertical.center,
+        obscureText: isPassword && obscureText,
         style: const TextStyle(
-          fontSize: 16,
           color: Colors.black87,
+          fontSize: 16,
         ),
         decoration: InputDecoration(
           hintText: hint,
@@ -40,19 +34,42 @@ class CustomTextField extends StatelessWidget {
             color: Colors.grey.shade600,
             fontSize: 16,
           ),
-          contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-          border: InputBorder.none,
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 16,
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: const BorderSide(
+              color: AppColors.buttonBorder,
+              width: 1,
+            ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: const BorderSide(
+              color: AppColors.buttonBorder,
+              width: 1,
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: const BorderSide(
+              color: AppColors.buttonBorder,
+              width: 2,
+            ),
+          ),
           suffixIcon: isPassword
               ? IconButton(
                   icon: Icon(
-                    obscureText ? Icons.visibility_off : Icons.visibility,
+                    obscureText ? Icons.visibility : Icons.visibility_off,
                     color: Colors.grey.shade600,
-                    size: 20,
                   ),
                   onPressed: onToggleVisibility,
                 )
               : null,
         ),
+        textAlignVertical: TextAlignVertical.center,
       ),
     );
   }

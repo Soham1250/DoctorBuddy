@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../core/theme/app_colors.dart';
 import '../widgets/custom_text_field.dart';
 import 'receptionist_main_screen.dart';
 
@@ -52,7 +53,7 @@ class _ReceptionistLoginScreenState extends State<ReceptionistLoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.background,
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -66,14 +67,14 @@ class _ReceptionistLoginScreenState extends State<ReceptionistLoginScreen> {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: Colors.grey.shade300,
+                      color: Colors.black,
                       width: 1,
                     ),
                   ),
-                  child: Icon(
+                  child: const Icon(
                     Icons.person_outline,
                     size: 70,
-                    color: Colors.grey.shade400,
+                    color: Colors.black,
                   ),
                 ),
                 const SizedBox(height: 48),
