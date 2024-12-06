@@ -137,7 +137,17 @@ class _ReceptionistMainScreenState extends State<ReceptionistMainScreen> {
   void _handleCancelAppointment(Appointment appointment) {
     setState(() {
       appointment.cancelAppointment();
+      
+      // Update the appointment in daily records if it exists
+      for (var record in _dailyRecords) {
+        final appointmentIndex = record.appointments
+            .indexWhere((a) => a.patientId == appointment.patientId);
+        if (appointmentIndex != -1) {
+          record.appointments[appointmentIndex].cancelAppointment();
+        }
+      }
     });
+    
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Appointment for ${appointment.patientName} cancelled'),
@@ -202,12 +212,12 @@ class _ReceptionistMainScreenState extends State<ReceptionistMainScreen> {
                 onCancelAppointment: _handleCancelAppointment,
               ),
             ),
+            BottomNavigation(
+              currentIndex: _currentIndex,
+              onTap: _handleBottomNavTap,
+            ),
           ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigation(
-        currentIndex: _currentIndex,
-        onTap: _handleBottomNavTap,
       ),
     );
   }

@@ -46,8 +46,8 @@ class AppointmentList extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pop();
                 onCancelAppointment(appointment);
+                Navigator.of(context).pop();
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.mediumBlue,
@@ -117,30 +117,31 @@ class AppointmentList extends StatelessWidget {
                   },
                 ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: SizedBox(
-            width: double.infinity,
-            height: 50,
-            child: ElevatedButton(
-              onPressed: onDoneForDay,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.mediumBlue,
-                side: const BorderSide(color: Colors.black),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+        if (appointments.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: ElevatedButton(
+                onPressed: onDoneForDay,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.mediumBlue,
+                  side: const BorderSide(color: Colors.black),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
-              ),
-              child: const Text(
-                'Done for Day',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
+                child: const Text(
+                  'Done for Day',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                  ),
                 ),
               ),
             ),
           ),
-        ),
       ],
     );
   }
