@@ -137,7 +137,7 @@ class _ReceptionistMainScreenState extends State<ReceptionistMainScreen> {
   void _handleCancelAppointment(Appointment appointment) {
     setState(() {
       appointment.cancelAppointment();
-      
+
       // Update the appointment in daily records if it exists
       for (var record in _dailyRecords) {
         final appointmentIndex = record.appointments
@@ -147,7 +147,7 @@ class _ReceptionistMainScreenState extends State<ReceptionistMainScreen> {
         }
       }
     });
-    
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Appointment for ${appointment.patientName} cancelled'),
@@ -156,33 +156,13 @@ class _ReceptionistMainScreenState extends State<ReceptionistMainScreen> {
     );
   }
 
-  void _handleBottomNavTap(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-
-    if (index == 2) {
-      // Make Appointment
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const MakeAppointmentScreen(),
-        ),
-      );
-    } else if (index == 0) {
-      // Search Patient
+  void _handleBottomNavigation(int index) {
+    if (index == 0) {
+      // add patient
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => const SearchPatientScreen(),
-        ),
-      );
-    } else if (index == 3) {
-      // Add Patient
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const AddPatientScreen(),
         ),
       );
     } else if (index == 1) {
@@ -191,6 +171,31 @@ class _ReceptionistMainScreenState extends State<ReceptionistMainScreen> {
         context,
         MaterialPageRoute(
           builder: (context) => HistoryScreen(dailyRecords: _dailyRecords),
+        ),
+      );
+    } else if (index == 2) {
+      // make appointment
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => MakeAppointmentScreen(
+            onAppointmentCreated: (appointment) {
+              setState(() {
+                _appointments.add(appointment);
+                // Sort appointments by time
+                _appointments.sort(
+                    (a, b) => a.appointmentTime.compareTo(b.appointmentTime));
+              });
+            },
+          ),
+        ),
+      );
+    } else if (index == 3) {
+      // add patient
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const AddPatientScreen(),
         ),
       );
     }
@@ -214,7 +219,7 @@ class _ReceptionistMainScreenState extends State<ReceptionistMainScreen> {
             ),
             BottomNavigation(
               currentIndex: _currentIndex,
-              onTap: _handleBottomNavTap,
+              onTap: _handleBottomNavigation,
             ),
           ],
         ),
