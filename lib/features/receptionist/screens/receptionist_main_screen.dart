@@ -115,6 +115,7 @@ class _ReceptionistMainScreenState extends State<ReceptionistMainScreen> {
                       content: Text(
                           'Appointments for $currentDate saved successfully!'),
                       backgroundColor: AppColors.darkestBlue,
+                      duration: const Duration(milliseconds: 700),
                     ),
                   );
                 }
@@ -151,6 +152,7 @@ class _ReceptionistMainScreenState extends State<ReceptionistMainScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Appointment for ${appointment.patientName} cancelled'),
+        duration: const Duration(milliseconds: 700),
         backgroundColor: Colors.red,
       ),
     );

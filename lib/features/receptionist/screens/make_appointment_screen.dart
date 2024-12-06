@@ -118,6 +118,7 @@ class _MakeAppointmentScreenState extends State<MakeAppointmentScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('Appointment created successfully'),
+        duration: Duration(milliseconds: 700),
         backgroundColor: Colors.green,
       ),
     );
