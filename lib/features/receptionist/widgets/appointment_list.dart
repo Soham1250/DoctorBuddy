@@ -1,76 +1,117 @@
 import 'package:flutter/material.dart';
+import '../../../core/theme/app_colors.dart';
 import '../models/appointment.dart';
 
 class AppointmentList extends StatelessWidget {
   final List<Appointment> appointments;
   final VoidCallback onDoneForDay;
+  final Function(Appointment) onCancelAppointment;
+  final bool showCompleteButton;
 
   const AppointmentList({
     super.key,
     required this.appointments,
     required this.onDoneForDay,
+    required this.showCompleteButton,
+    required this.onCancelAppointment,
   });
+
+  void _showCancelConfirmation(BuildContext context, Appointment appointment) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: AppColors.lighterBlue,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+            side: const BorderSide(color: Colors.black),
+          ),
+          title: const Text(
+            'Cancel Appointment',
+            style: TextStyle(color: Colors.black),
+          ),
+          content: const Text(
+            'Are you sure you want to cancel this appointment?',
+            style: TextStyle(color: Colors.black),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text(
+                'No',
+                style: TextStyle(color: Colors.black),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                onCancelAppointment(appointment);
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.mediumBlue,
+                side: const BorderSide(color: Colors.black),
+              ),
+              child: const Text(
+                'Yes',
+                style: TextStyle(color: Colors.black),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-          child: Text(
-            "today's appoints so far,",
-            style: TextStyle(
-              fontSize: 16,
-              color: Colors.grey.shade600,
-            ),
-          ),
-        ),
         Expanded(
           child: appointments.isEmpty
-              ? Center(
+              ? const Center(
                   child: Text(
                     'No appointments for today',
                     style: TextStyle(
-                      color: Colors.grey.shade600,
                       fontSize: 16,
+                      color: Colors.black54,
                     ),
                   ),
                 )
               : ListView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   itemCount: appointments.length,
                   itemBuilder: (context, index) {
                     final appointment = appointments[index];
                     return Card(
-                      margin: const EdgeInsets.only(bottom: 12.0),
+                      color: AppColors.lighterBlue,
+                      margin: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
+                        side: const BorderSide(color: Colors.black),
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                '${index + 1}. ${appointment.details}',
-                                style: const TextStyle(fontSize: 16),
-                              ),
-                            ),
-                            IconButton(
-                              icon: const Icon(Icons.close),
-                              onPressed: () {
-                                // Handle decline
-                              },
-                            ),
-                            IconButton(
-                              icon: const Icon(Icons.check),
-                              onPressed: () {
-                                // Handle complete
-                              },
-                            ),
-                          ],
+                      child: ListTile(
+                        title: Text(
+                          appointment.details,
+                          style: const TextStyle(color: Colors.black),
                         ),
+                        trailing: appointment.isDeclined
+                            ? const Text(
+                                'Cancelled',
+                                style: TextStyle(
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )
+                            : IconButton(
+                                icon: const Icon(Icons.cancel_outlined),
+                                color: Colors.red,
+                                onPressed: () => _showCancelConfirmation(
+                                    context, appointment),
+                              ),
                       ),
                     );
                   },
@@ -78,20 +119,24 @@ class AppointmentList extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.all(16.0),
-          child: ElevatedButton(
-            onPressed: onDoneForDay,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.green,
-              padding: const EdgeInsets.symmetric(vertical: 12),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
+          child: SizedBox(
+            width: double.infinity,
+            height: 50,
+            child: ElevatedButton(
+              onPressed: onDoneForDay,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.mediumBlue,
+                side: const BorderSide(color: Colors.black),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
-            ),
-            child: const Text(
-              'Done for the day',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16,
+              child: const Text(
+                'Done for Day',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                ),
               ),
             ),
           ),

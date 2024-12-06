@@ -2,21 +2,47 @@ class Appointment {
   final String patientName;
   final String patientId;
   final String appointmentTime;
-  final String reason;
-  final bool isCompleted;
-  final bool isDeclined;
+  bool isCompleted;
+  bool isDeclined;
 
   Appointment({
     required this.patientName,
     required this.patientId,
     required this.appointmentTime,
-    required this.reason,
     this.isCompleted = false,
     this.isDeclined = false,
   });
 
-  String get details => 
-    '$patientName (ID: $patientId)\n'
-    'Time: $appointmentTime\n'
-    'Reason: $reason';
+  void cancelAppointment() {
+    isDeclined = true;
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'patientName': patientName,
+      'patientId': patientId,
+      'appointmentTime': appointmentTime,
+      'isCompleted': isCompleted,
+      'isDeclined': isDeclined,
+    };
+  }
+
+  factory Appointment.fromJson(Map<String, dynamic> json) {
+    return Appointment(
+      patientName: json['patientName'],
+      patientId: json['patientId'],
+      appointmentTime: json['appointmentTime'],
+      isCompleted: json['isCompleted'] ?? false,
+      isDeclined: json['isDeclined'] ?? false,
+    );
+  }
+
+  String get details =>
+      '$patientName (ID: $patientId)\nTime: $appointmentTime\n${_getStatus()}';
+
+  String _getStatus() {
+    if (isDeclined) return '(Cancelled)';
+    if (isCompleted) return '(Completed)';
+    return '(Scheduled)';
+  }
 }
