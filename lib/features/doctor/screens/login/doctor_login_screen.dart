@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import '../../../core/theme/app_colors.dart';
-import '../widgets/custom_text_field.dart';
-import 'receptionist_main_screen.dart';
+import '../../../receptionist/widgets/custom_text_field.dart';
+import '../home/doctor_home_screen.dart';
+import '../../../../core/theme/app_colors.dart';
 
-class ReceptionistLoginScreen extends StatefulWidget {
-  const ReceptionistLoginScreen({super.key});
+class DoctorLoginScreen extends StatefulWidget {
+  const DoctorLoginScreen({super.key});
 
   @override
-  State<ReceptionistLoginScreen> createState() =>
-      _ReceptionistLoginScreenState();
+  State<DoctorLoginScreen> createState() => _DoctorLoginScreenState();
 }
 
-class _ReceptionistLoginScreenState extends State<ReceptionistLoginScreen> {
+class _DoctorLoginScreenState extends State<DoctorLoginScreen> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _obscurePassword = true;
@@ -34,13 +33,13 @@ class _ReceptionistLoginScreenState extends State<ReceptionistLoginScreen> {
     final username = _usernameController.text;
     final password = _passwordController.text;
 
-    if (username == 'Recept123' && password == 'Recept123') {
+    if (username == 'Doctor123' && password == 'Doctor123') {
       setState(() {
         _errorMessage = null;
       });
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => const ReceptionistMainScreen(),
+          builder: (context) => const DoctorHomeScreen(),
         ),
       );
     } else {
@@ -72,7 +71,7 @@ class _ReceptionistLoginScreenState extends State<ReceptionistLoginScreen> {
                     ),
                   ),
                   child: const Icon(
-                    Icons.person_outline,
+                    Icons.medical_services_outlined,
                     size: 70,
                     color: Colors.black,
                   ),
@@ -149,36 +148,6 @@ class _ReceptionistLoginScreenState extends State<ReceptionistLoginScreen> {
                   ),
                 ),
                 const SizedBox(height: 32),
-
-                // Bottom Links
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 32),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      TextButton(
-                        onPressed: () {},
-                        style: TextButton.styleFrom(
-                          foregroundColor: Colors.grey.shade700,
-                        ),
-                        child: const Text(
-                          'New? Register',
-                          style: TextStyle(fontSize: 14),
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () {},
-                        style: TextButton.styleFrom(
-                          foregroundColor: Colors.grey.shade700,
-                        ),
-                        child: const Text(
-                          'Forgot Password?',
-                          style: TextStyle(fontSize: 14),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
               ],
             ),
           ),

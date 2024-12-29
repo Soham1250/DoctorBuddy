@@ -11,6 +11,7 @@ import 'make_appointment_screen.dart';
 import 'search_patient_screen.dart';
 import 'add_patient_screen.dart';
 import 'history.dart';
+import '../../../features/auth/screens/role_selection/role_selection_screen.dart';
 
 class ReceptionistMainScreen extends StatefulWidget {
   const ReceptionistMainScreen({super.key});
@@ -206,6 +207,46 @@ class _ReceptionistMainScreenState extends State<ReceptionistMainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: const Text('Doctor Buddy'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: const Text('Logout'),
+                    content: const Text('Are you sure you want to logout?'),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context); // Close dialog
+                        },
+                        child: const Text('Cancel'),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const RoleSelectionScreen(),
+                            ),
+                            (route) => false, // Remove all previous routes
+                          );
+                        },
+                        child: const Text('Logout', style: TextStyle(color: Colors.red)),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+          ),
+        ],
+      ),
       backgroundColor: AppColors.lightestBlue,
       body: SafeArea(
         child: Column(

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../../../core/responsive/responsive_layout.dart';
+// import '../../../../core/responsive/responsive_layout.dart';
 import '../../../../core/theme/app_colors.dart';
-import '../../../doctor/screens/doctor_home.dart';
 import '../../../receptionist/screens/login_screen.dart';
 import 'mobile_layout.dart';
 import 'tablet_layout.dart';
+import '../../../doctor/screens/login/doctor_login_screen.dart';
 
 class RoleSelectionScreen extends StatelessWidget {
   const RoleSelectionScreen({super.key});
@@ -12,7 +12,7 @@ class RoleSelectionScreen extends StatelessWidget {
   void _navigateToDoctor(BuildContext context) {
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
-        builder: (context) => const DoctorHome(),
+        builder: (context) => const DoctorLoginScreen(),
       ),
     );
   }
