@@ -56,25 +56,40 @@ class _DoctorLoginScreenState extends State<DoctorLoginScreen> {
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
+            padding: const EdgeInsets.all(24.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                // Avatar Circle
-                Container(
-                  width: 140,
-                  height: 140,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: Colors.black,
-                      width: 1,
+                // Avatar and Title
+                Column(
+                  children: [
+                    Container(
+                      width: 140,
+                      height: 140,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: AppColors.borderColor,
+                          width: 1,
+                        ),
+                        color: AppColors.surface,
+                      ),
+                      child: Icon(
+                        Icons.person_outline,
+                        size: 70,
+                        color: AppColors.primaryText,
+                      ),
                     ),
-                  ),
-                  child: const Icon(
-                    Icons.medical_services_outlined,
-                    size: 70,
-                    color: Colors.black,
-                  ),
+                    const SizedBox(height: 48),
+                    Text(
+                      'Doctor Login',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.primaryText,
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 48),
 
@@ -109,40 +124,22 @@ class _DoctorLoginScreenState extends State<DoctorLoginScreen> {
                 const SizedBox(height: 32),
 
                 // Login Button
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 32),
-                  child: FractionallySizedBox(
-                    widthFactor: 0.8,
-                    child: SizedBox(
-                      height: 50,
-                      child: ElevatedButton(
-                        onPressed: _handleLogin,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Theme.of(context).primaryColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          elevation: 0,
-                        ),
-                        child: const Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Login',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            SizedBox(width: 8),
-                            Icon(
-                              Icons.arrow_forward,
-                              color: Colors.white,
-                              size: 20,
-                            ),
-                          ],
-                        ),
+                SizedBox(
+                  width: double.infinity,
+                  height: 50,
+                  child: ElevatedButton(
+                    onPressed: _handleLogin,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    child: Text(
+                      'Login',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: AppColors.primaryText,
                       ),
                     ),
                   ),

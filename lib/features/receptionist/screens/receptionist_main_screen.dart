@@ -67,18 +67,18 @@ class _ReceptionistMainScreenState extends State<ReceptionistMainScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: AppColors.lighterBlue,
+          backgroundColor: AppColors.background,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
-            side: const BorderSide(color: Colors.black),
+            side: const BorderSide(color: AppColors.borderColor),
           ),
           title: const Text(
             'End Day Confirmation',
-            style: TextStyle(color: Colors.black),
+            style: TextStyle(color: AppColors.primaryText),
           ),
           content: const Text(
             'Are you sure you want to end the day?',
-            style: TextStyle(color: Colors.black),
+            style: TextStyle(color: AppColors.primaryText),
           ),
           actions: [
             TextButton(
@@ -87,7 +87,7 @@ class _ReceptionistMainScreenState extends State<ReceptionistMainScreen> {
               },
               child: const Text(
                 'No',
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(color: AppColors.primaryText),
               ),
             ),
             ElevatedButton(
@@ -115,19 +115,19 @@ class _ReceptionistMainScreenState extends State<ReceptionistMainScreen> {
                     SnackBar(
                       content: Text(
                           'Appointments for $currentDate saved successfully!'),
-                      backgroundColor: AppColors.darkestBlue,
+                      backgroundColor: AppColors.background,
                       duration: const Duration(milliseconds: 700),
                     ),
                   );
                 }
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.mediumBlue,
-                side: const BorderSide(color: Colors.black),
+                backgroundColor: AppColors.background,
+                side: const BorderSide(color: AppColors.borderColor),
               ),
               child: const Text(
                 'Yes',
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(color: AppColors.primaryText),
               ),
             ),
           ],
@@ -237,7 +237,8 @@ class _ReceptionistMainScreenState extends State<ReceptionistMainScreen> {
                             (route) => false, // Remove all previous routes
                           );
                         },
-                        child: const Text('Logout', style: TextStyle(color: Colors.red)),
+                        child: const Text('Logout',
+                            style: TextStyle(color: AppColors.error)),
                       ),
                     ],
                   );
@@ -247,7 +248,7 @@ class _ReceptionistMainScreenState extends State<ReceptionistMainScreen> {
           ),
         ],
       ),
-      backgroundColor: AppColors.lightestBlue,
+      backgroundColor: AppColors.background,
       body: SafeArea(
         child: Column(
           children: [

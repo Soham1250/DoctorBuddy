@@ -23,7 +23,10 @@ class RoleButton extends StatelessWidget {
       child: OutlinedButton(
         onPressed: onPressed,
         style: OutlinedButton.styleFrom(
-          side: const BorderSide(color: AppColors.buttonBorder, width: 1),
+          side: const BorderSide(
+            color: AppColors.borderColor,
+            width: 1,
+          ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),
@@ -31,7 +34,7 @@ class RoleButton extends StatelessWidget {
         child: Text(
           text,
           style: const TextStyle(
-            color: AppColors.buttonText,
+            color: AppColors.primaryText,
             fontSize: 16,
             fontWeight: FontWeight.w500,
           ),

@@ -38,7 +38,7 @@ class _SearchPatientScreenState extends State<SearchPatientScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Patient not found'),
-          backgroundColor: AppColors.darkestBlue,
+          backgroundColor: AppColors.background,
         ),
       );
     }
@@ -55,7 +55,7 @@ class _SearchPatientScreenState extends State<SearchPatientScreen> {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        backgroundColor: AppColors.lighterBlue,
+        backgroundColor: AppColors.surface,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
@@ -63,7 +63,7 @@ class _SearchPatientScreenState extends State<SearchPatientScreen> {
         ),
         title: const Text(
           'Search Patient',
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: AppColors.primaryText),
         ),
       ),
       body: Padding(
@@ -73,45 +73,38 @@ class _SearchPatientScreenState extends State<SearchPatientScreen> {
             // Search Section
             Container(
               padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: AppColors.lighterBlue,
-                border: Border.all(color: Colors.black),
-                borderRadius: BorderRadius.circular(12),
+              decoration: const BoxDecoration(
+                color: AppColors.surface,
+                border: Border(
+                  bottom: BorderSide(color: AppColors.borderColor),
+                ),
               ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      controller: _searchController,
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                      ),
-                      decoration: const InputDecoration(
-                        hintText: 'Enter Patient Name',
-                        border: InputBorder.none,
-                        hintStyle: TextStyle(
-                          color: Colors.black54,
-                        ),
-                      ),
-                    ),
+              child: TextField(
+                controller: _searchController,
+                style: const TextStyle(color: AppColors.primaryText),
+                decoration: InputDecoration(
+                  hintText: 'Enter Patient Name',
+                  hintStyle: const TextStyle(color: AppColors.secondaryText),
+                  prefixIcon:
+                      const Icon(Icons.search, color: AppColors.secondaryText),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: const BorderSide(color: AppColors.borderColor),
                   ),
-                  const SizedBox(width: 16),
-                  ElevatedButton(
-                    onPressed: _searchPatient,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.mediumBlue,
-                      side: const BorderSide(color: Colors.black),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                    child: const Text(
-                      'Search',
-                      style: TextStyle(color: Colors.black),
-                    ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: const BorderSide(color: AppColors.borderColor),
                   ),
-                ],
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: const BorderSide(color: AppColors.primary),
+                  ),
+                  filled: true,
+                  fillColor: AppColors.cardColor,
+                ),
+                onChanged: (value) {
+                  // Implement search functionality
+                },
               ),
             ),
             const SizedBox(height: 24),
@@ -122,8 +115,8 @@ class _SearchPatientScreenState extends State<SearchPatientScreen> {
                 width: double.infinity,
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: AppColors.lighterBlue,
-                  border: Border.all(color: Colors.black),
+                  color: AppColors.surface,
+                  border: Border.all(color: AppColors.borderColor),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: _patientFound
@@ -141,7 +134,7 @@ class _SearchPatientScreenState extends State<SearchPatientScreen> {
                                     style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16,
-                                      color: Colors.black,
+                                      color: AppColors.primaryText,
                                     ),
                                   ),
                                   const SizedBox(height: 4),
@@ -149,7 +142,7 @@ class _SearchPatientScreenState extends State<SearchPatientScreen> {
                                     entry.value,
                                     style: const TextStyle(
                                       fontSize: 16,
-                                      color: Colors.black,
+                                      color: AppColors.primaryText,
                                     ),
                                   ),
                                 ],
@@ -162,7 +155,7 @@ class _SearchPatientScreenState extends State<SearchPatientScreen> {
                         child: Text(
                           'Patient details will appear here',
                           style: TextStyle(
-                            color: Colors.black54,
+                            color: AppColors.secondaryText,
                             fontSize: 16,
                           ),
                         ),

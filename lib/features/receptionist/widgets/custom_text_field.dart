@@ -24,14 +24,14 @@ class CustomTextField extends StatelessWidget {
       child: TextField(
         controller: controller,
         obscureText: isPassword && obscureText,
-        style: const TextStyle(
-          color: Colors.black87,
+        style: TextStyle(
+          color: AppColors.primaryText,
           fontSize: 16,
         ),
         decoration: InputDecoration(
           hintText: hint,
           hintStyle: TextStyle(
-            color: Colors.grey.shade600,
+            color: AppColors.secondaryText,
             fontSize: 16,
           ),
           contentPadding: const EdgeInsets.symmetric(
@@ -41,21 +41,21 @@ class CustomTextField extends StatelessWidget {
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: const BorderSide(
-              color: AppColors.buttonBorder,
+              color: AppColors.borderColor,
               width: 1,
             ),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: const BorderSide(
-              color: AppColors.buttonBorder,
+              color: AppColors.borderColor,
               width: 1,
             ),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: const BorderSide(
-              color: AppColors.buttonBorder,
+              color: AppColors.borderColor,
               width: 2,
             ),
           ),

@@ -1,7 +1,10 @@
+import 'package:doctorbuddy/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../../../auth/screens/role_selection/role_selection_screen.dart';
 import '../patient/patient_details_screen.dart';
+import '../search/search_patient_screen.dart';
+import '../history/history_screen.dart';
 
 class DoctorHomeScreen extends StatefulWidget {
   const DoctorHomeScreen({super.key});
@@ -14,11 +17,21 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
   bool _isExpanded = true;
 
   void _handleSearchPatient(BuildContext context) {
-    // TODO: Navigate to search patient screen
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const DoctorSearchPatientScreen(),
+      ),
+    );
   }
 
   void _handleHistory(BuildContext context) {
-    // TODO: Navigate to history screen
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const DoctorHistoryScreen(),
+      ),
+    );
   }
 
   void _handleLogout(BuildContext context) {
@@ -57,7 +70,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
   @override
   Widget build(BuildContext context) {
     final today = DateFormat('EEEE, MMMM d, yyyy').format(DateTime.now());
-    
+
     return Scaffold(
       body: Row(
         children: [
@@ -65,15 +78,14 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
           AnimatedContainer(
             duration: const Duration(milliseconds: 200),
             width: _isExpanded ? 100 : 70,
-            decoration: BoxDecoration(
-              color: Colors.blue.shade50,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  blurRadius: 5,
-                  offset: const Offset(0, 2),
+            decoration: const BoxDecoration(
+              color: AppColors.surface,
+              border: Border(
+                right: BorderSide(
+                  color: AppColors.borderColor,
+                  width: 1,
                 ),
-              ],
+              ),
             ),
             child: Column(
               children: [
@@ -93,7 +105,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                   ),
                 ),
                 const Divider(),
-                
+
                 // Main options (80% height)
                 Expanded(
                   flex: 8, // 80% of remaining space
@@ -143,33 +155,49 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
 
           // Main Content
           Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(24.0),
+            child: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: AppColors.backgroundGradient,
+                ),
+              ),
+              padding: const EdgeInsets.all(24),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  // Date Header
+                  // Today's Date
                   Container(
-                    padding: const EdgeInsets.all(16),
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 12,
+                    ),
                     decoration: BoxDecoration(
-                      color: Colors.red.shade50,
+                      color: AppColors.cardColor,
                       borderRadius: BorderRadius.circular(8),
+                      border: Border.all(
+                        color: AppColors.borderColor,
+                        width: 1,
+                      ),
                     ),
                     child: Text(
-                      today,
+                      DateFormat('dd MMMM yyyy').format(DateTime.now()),
                       style: const TextStyle(
-                        fontSize: 24,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
+                        color: AppColors.primaryText,
                       ),
-                      textAlign: TextAlign.center,
                     ),
                   ),
 
                   const SizedBox(height: 24),
                   const Text(
-                    "Today's appointments so far,",
+                    'Today\'s appointments so far,',
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 16,
+                      color: AppColors.secondaryText,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -182,6 +210,14 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                       itemBuilder: (context, index) {
                         return Card(
                           margin: const EdgeInsets.only(bottom: 16),
+                          color: AppColors.cardColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            side: const BorderSide(
+                              color: AppColors.borderColor,
+                              width: 1,
+                            ),
+                          ),
                           child: ListTile(
                             contentPadding: const EdgeInsets.all(16),
                             title: Text(
@@ -189,11 +225,15 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
+                                color: AppColors.primaryText,
                               ),
                             ),
                             subtitle: Text(
                               'Details of patient ${index + 1}',
-                              style: const TextStyle(fontSize: 16),
+                              style: const TextStyle(
+                                fontSize: 16,
+                                color: AppColors.secondaryText,
+                              ),
                             ),
                             onTap: () {
                               Navigator.push(
@@ -212,14 +252,14 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
                     ),
                   ),
 
-                  // Bottom branding
+                  // Imperial Solutions text at bottom
                   const Padding(
-                    padding: EdgeInsets.all(16.0),
+                    padding: EdgeInsets.only(top: 16.0),
                     child: Text(
                       'Imperial Solutions',
                       style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 14,
+                        color: AppColors.tertiaryText,
+                        fontSize: 12,
                       ),
                       textAlign: TextAlign.center,
                     ),

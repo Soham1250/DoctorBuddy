@@ -54,19 +54,19 @@ class _MakeAppointmentScreenState extends State<MakeAppointmentScreen> {
         return Theme(
           data: Theme.of(context).copyWith(
             timePickerTheme: TimePickerThemeData(
-              backgroundColor: AppColors.lighterBlue,
+              backgroundColor: AppColors.background,
               hourMinuteShape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
-                side: const BorderSide(color: Colors.black),
+                side: BorderSide(color: AppColors.borderColor),
               ),
-              dayPeriodBorderSide: const BorderSide(color: Colors.black),
+              dayPeriodBorderSide: BorderSide(color: AppColors.borderColor),
               dayPeriodShape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
-                side: const BorderSide(color: Colors.black),
+                side: BorderSide(color: AppColors.borderColor),
               ),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
-                side: const BorderSide(color: Colors.black),
+                side: BorderSide(color: AppColors.borderColor),
               ),
             ),
             textButtonTheme: TextButtonThemeData(
@@ -114,7 +114,7 @@ class _MakeAppointmentScreenState extends State<MakeAppointmentScreen> {
     );
 
     widget.onAppointmentCreated(newAppointment);
-    
+
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('Appointment created successfully'),
@@ -122,7 +122,7 @@ class _MakeAppointmentScreenState extends State<MakeAppointmentScreen> {
         backgroundColor: Colors.green,
       ),
     );
-    
+
     Navigator.pop(context);
   }
 
@@ -136,9 +136,9 @@ class _MakeAppointmentScreenState extends State<MakeAppointmentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.lightestBlue,
+      backgroundColor: AppColors.background,
       appBar: AppBar(
-        backgroundColor: AppColors.darkestBlue,
+        backgroundColor: AppColors.background,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
@@ -146,7 +146,7 @@ class _MakeAppointmentScreenState extends State<MakeAppointmentScreen> {
         ),
         title: const Text(
           'Make Appointment',
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: AppColors.primaryText),
         ),
       ),
       body: Padding(
@@ -158,8 +158,8 @@ class _MakeAppointmentScreenState extends State<MakeAppointmentScreen> {
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: AppColors.lighterBlue,
-                border: Border.all(color: Colors.black),
+                color: AppColors.background,
+                border: Border.all(color: AppColors.borderColor),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Row(
@@ -168,14 +168,14 @@ class _MakeAppointmentScreenState extends State<MakeAppointmentScreen> {
                     child: TextField(
                       controller: _searchController,
                       style: const TextStyle(
-                        color: Colors.black,
+                        color: AppColors.primaryText,
                         fontSize: 16,
                       ),
                       decoration: const InputDecoration(
                         hintText: 'Enter Patient Name',
                         border: InputBorder.none,
                         hintStyle: TextStyle(
-                          color: Colors.black54,
+                          color: AppColors.secondaryText,
                         ),
                       ),
                     ),
@@ -184,15 +184,15 @@ class _MakeAppointmentScreenState extends State<MakeAppointmentScreen> {
                   ElevatedButton(
                     onPressed: _searchPatient,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.mediumBlue,
-                      side: const BorderSide(color: Colors.black),
+                      backgroundColor: AppColors.background,
+                      side: BorderSide(color: AppColors.borderColor),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
                     ),
                     child: const Text(
                       'Search',
-                      style: TextStyle(color: Colors.black),
+                      style: TextStyle(color: AppColors.primaryText),
                     ),
                   ),
                 ],
@@ -204,8 +204,8 @@ class _MakeAppointmentScreenState extends State<MakeAppointmentScreen> {
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: AppColors.lighterBlue,
-                  border: Border.all(color: Colors.black),
+                  color: AppColors.background,
+                  border: Border.all(color: AppColors.borderColor),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Column(
@@ -216,7 +216,7 @@ class _MakeAppointmentScreenState extends State<MakeAppointmentScreen> {
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                        color: AppColors.primaryText,
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -229,12 +229,12 @@ class _MakeAppointmentScreenState extends State<MakeAppointmentScreen> {
                               '${e.key}: ',
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: Colors.black,
+                                color: AppColors.primaryText,
                               ),
                             ),
                             Text(
                               e.value,
-                              style: const TextStyle(color: Colors.black),
+                              style: const TextStyle(color: AppColors.primaryText),
                             ),
                           ],
                         ),
@@ -248,8 +248,8 @@ class _MakeAppointmentScreenState extends State<MakeAppointmentScreen> {
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: AppColors.lighterBlue,
-                  border: Border.all(color: Colors.black),
+                  color: AppColors.background,
+                  border: Border.all(color: AppColors.borderColor),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(
@@ -259,14 +259,14 @@ class _MakeAppointmentScreenState extends State<MakeAppointmentScreen> {
                         controller: _timeController,
                         readOnly: true,
                         style: const TextStyle(
-                          color: Colors.black,
+                          color: AppColors.primaryText,
                           fontSize: 16,
                         ),
                         decoration: const InputDecoration(
                           hintText: 'Select Time',
                           border: InputBorder.none,
                           hintStyle: TextStyle(
-                            color: Colors.black54,
+                            color: AppColors.secondaryText,
                           ),
                         ),
                       ),
@@ -275,15 +275,15 @@ class _MakeAppointmentScreenState extends State<MakeAppointmentScreen> {
                     ElevatedButton(
                       onPressed: () => _selectTime(context),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.mediumBlue,
-                        side: const BorderSide(color: Colors.black),
+                        backgroundColor: AppColors.background,
+                        side: BorderSide(color: AppColors.borderColor),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
                       ),
                       child: const Text(
                         'Pick Time',
-                        style: TextStyle(color: Colors.black),
+                        style: TextStyle(color: AppColors.primaryText),
                       ),
                     ),
                   ],
@@ -296,8 +296,8 @@ class _MakeAppointmentScreenState extends State<MakeAppointmentScreen> {
                 child: ElevatedButton(
                   onPressed: _createAppointment,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.mediumBlue,
-                    side: const BorderSide(color: Colors.black),
+                    backgroundColor: AppColors.background,
+                    side: BorderSide(color: AppColors.borderColor),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -305,7 +305,7 @@ class _MakeAppointmentScreenState extends State<MakeAppointmentScreen> {
                   child: const Text(
                     'Create Appointment',
                     style: TextStyle(
-                      color: Colors.black,
+                      color: AppColors.primaryText,
                       fontSize: 16,
                     ),
                   ),

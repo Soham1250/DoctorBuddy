@@ -21,18 +21,18 @@ class AppointmentList extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: AppColors.lighterBlue,
+          backgroundColor: AppColors.background,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
-            side: const BorderSide(color: Colors.black),
+            side: const BorderSide(color: AppColors.borderColor),
           ),
           title: const Text(
             'Cancel Appointment',
-            style: TextStyle(color: Colors.black),
+            style: TextStyle(color: AppColors.primaryText),
           ),
           content: const Text(
             'Are you sure you want to cancel this appointment?',
-            style: TextStyle(color: Colors.black),
+            style: TextStyle(color: AppColors.primaryText),
           ),
           actions: [
             TextButton(
@@ -41,7 +41,7 @@ class AppointmentList extends StatelessWidget {
               },
               child: const Text(
                 'No',
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(color: AppColors.primaryText),
               ),
             ),
             ElevatedButton(
@@ -50,12 +50,12 @@ class AppointmentList extends StatelessWidget {
                 Navigator.of(context).pop();
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.mediumBlue,
-                side: const BorderSide(color: Colors.black),
+                backgroundColor: AppColors.background,
+                side: const BorderSide(color: AppColors.borderColor),
               ),
               child: const Text(
                 'Yes',
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(color: AppColors.primaryText),
               ),
             ),
           ],
@@ -75,7 +75,7 @@ class AppointmentList extends StatelessWidget {
                     'No appointments for today',
                     style: TextStyle(
                       fontSize: 16,
-                      color: Colors.black54,
+                      color: AppColors.primaryText,
                     ),
                   ),
                 )
@@ -84,19 +84,19 @@ class AppointmentList extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final appointment = appointments[index];
                     return Card(
-                      color: AppColors.lighterBlue,
+                      color: AppColors.background,
                       margin: const EdgeInsets.symmetric(
                         horizontal: 16,
                         vertical: 8,
                       ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
-                        side: const BorderSide(color: Colors.black),
+                        side: const BorderSide(color: AppColors.borderColor),
                       ),
                       child: ListTile(
                         title: Text(
                           appointment.details,
-                          style: const TextStyle(color: Colors.black),
+                          style: const TextStyle(color: AppColors.primaryText),
                         ),
                         trailing: appointment.isDeclined
                             ? const Text(
@@ -126,8 +126,8 @@ class AppointmentList extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: onDoneForDay,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.mediumBlue,
-                  side: const BorderSide(color: Colors.black),
+                  backgroundColor: AppColors.background,
+                  side: const BorderSide(color: AppColors.borderColor),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
@@ -135,7 +135,7 @@ class AppointmentList extends StatelessWidget {
                 child: const Text(
                   'Done for Day',
                   style: TextStyle(
-                    color: Colors.black,
+                    color: AppColors.primaryText,
                     fontSize: 16,
                   ),
                 ),

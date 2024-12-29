@@ -1,26 +1,32 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const Color primaryText = Color(0xFF000000);
-  static const Color buttonBorder = Color(0xFF000000);
-  static const Color buttonText = Color(0xFF000000);
+  // Primary Colors
+  static const Color primary = Color(0xFF2196F3);    // Blue
+  static const Color background = Color(0xFF121212); // Material Dark Background
+  static const Color surface = Color(0xFF1E1E1E);    // Slightly lighter black
+  static const Color cardColor = Color(0xFF2C2C2C);  // Even lighter for cards
+  
+  // Text Colors
+  static const Color primaryText = Color(0xFFFFFFFF);
+  static const Color secondaryText = Color(0xB3FFFFFF);  // 70% white
+  static const Color tertiaryText = Color(0x80FFFFFF);   // 50% white
 
-  // Serene Blues Palette
-  static const Color lightestBlue = Color(0xFFB3E5FC);  // #B3E5FC
-  static const Color lighterBlue = Color(0xFF81D4FA);   // #81D4FA
-  static const Color mediumBlue = Color(0xFF4FC3F7);    // #4FC3F7
-  static const Color darkerBlue = Color(0xFF29B6F6);    // #29B6F6
-  static const Color darkestBlue = Color(0xFF0288D1);   // #0288D1
+  // Border Colors
+  static const Color borderColor = Colors.grey;
 
-  // Main Background Color
-  static const Color background = lightestBlue;
+  // Accent Colors for highlights
+  static const Color accentBlue = Color(0xFF2196F3);
+  static const Color accentBlueLight = Color(0xFF64B5F6);
 
-  // Gradient Colors for potential use
-  static final List<Color> blueGradient = [
-    lightestBlue,
-    lighterBlue,
-    mediumBlue,
-    darkerBlue,
-    darkestBlue,
+  // Status Colors
+  static const Color success = Color(0xFF4CAF50);
+  static const Color error = Color(0xFFE53935);
+  static const Color warning = Color(0xFFFFA726);
+
+  // Gradients
+  static const List<Color> backgroundGradient = [
+    Color(0xFF1A1A1A),
+    Color(0xFF121212),
   ];
 }

@@ -32,7 +32,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: AppColors.lighterBlue,
+          backgroundColor: AppColors.background,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
             side: const BorderSide(color: Colors.black),
@@ -80,9 +80,9 @@ class _HistoryScreenState extends State<HistoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.lightestBlue,
+      backgroundColor: AppColors.background,
       appBar: AppBar(
-        backgroundColor: AppColors.darkestBlue,
+        backgroundColor: AppColors.background,
         title: const Text(
           'Appointment History',
           style: TextStyle(color: Colors.black),
@@ -116,11 +116,11 @@ class _HistoryScreenState extends State<HistoryScreen> {
             },
             calendarStyle: const CalendarStyle(
               todayDecoration: BoxDecoration(
-                color: AppColors.mediumBlue,
+                color: AppColors.cardColor,
                 shape: BoxShape.circle,
               ),
               selectedDecoration: BoxDecoration(
-                color: AppColors.darkestBlue,
+                color: AppColors.cardColor,
                 shape: BoxShape.circle,
               ),
               defaultTextStyle: TextStyle(color: Colors.black),
@@ -182,7 +182,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
             ),
             ...record.appointments.map((appointment) {
               return Card(
-                color: AppColors.lighterBlue,
+                color: AppColors.background,
                 margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -221,7 +221,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                   ),
                 ),
               );
-            }).toList(),
+            }),
           ],
         );
       },

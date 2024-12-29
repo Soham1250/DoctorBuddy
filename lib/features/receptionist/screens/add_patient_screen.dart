@@ -26,11 +26,10 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
 
   void _submitForm() {
     if (_formKey.currentState!.validate() && _selectedGender.isNotEmpty) {
-      // TODO: Add actual patient data submission
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Patient added successfully'),
-          backgroundColor: AppColors.darkestBlue,
+          backgroundColor: AppColors.background,
         ),
       );
       Navigator.pop(context);
@@ -38,7 +37,7 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Please select a gender'),
-          backgroundColor: AppColors.darkestBlue,
+          backgroundColor: AppColors.background,
         ),
       );
     }
@@ -49,15 +48,15 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        backgroundColor: AppColors.lighterBlue,
+        backgroundColor: AppColors.surface,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: AppColors.primaryText),
           onPressed: () => Navigator.pop(context),
         ),
         title: const Text(
           'Add a Patient',
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: AppColors.primaryText),
         ),
       ),
       body: SingleChildScrollView(
@@ -71,9 +70,9 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: AppColors.lighterBlue,
-                    border: Border.all(color: Colors.black),
-                    borderRadius: BorderRadius.circular(12),
+                    color: AppColors.surface,
+                    border: Border.all(color: AppColors.borderColor),
+                    borderRadius: BorderRadius.circular(8),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,20 +80,24 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
                       // Name Field
                       TextFormField(
                         controller: _nameController,
-                        style: const TextStyle(color: Colors.black),
-                        decoration: const InputDecoration(
+                        style: const TextStyle(color: AppColors.primaryText),
+                        decoration: InputDecoration(
                           hintText: 'Full Name',
-                          hintStyle: TextStyle(color: Colors.black54),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black),
+                          hintStyle: TextStyle(
+                              color: AppColors.primaryText.withOpacity(0.5)),
+                          border: const OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: AppColors.borderColor),
                           ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black),
+                          enabledBorder: const OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: AppColors.borderColor),
                           ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black),
+                          focusedBorder: const OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: AppColors.borderColor),
                           ),
-                          errorStyle: TextStyle(color: Colors.red),
+                          errorStyle: const TextStyle(color: Colors.red),
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -108,24 +111,28 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
                       // Age Field
                       TextFormField(
                         controller: _ageController,
-                        style: const TextStyle(color: Colors.black),
+                        style: const TextStyle(color: AppColors.primaryText),
                         keyboardType: TextInputType.number,
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly
                         ],
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           hintText: 'Age',
-                          hintStyle: TextStyle(color: Colors.black54),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black),
+                          hintStyle: TextStyle(
+                              color: AppColors.primaryText.withOpacity(0.5)),
+                          border: const OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: AppColors.borderColor),
                           ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black),
+                          enabledBorder: const OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: AppColors.borderColor),
                           ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black),
+                          focusedBorder: const OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: AppColors.borderColor),
                           ),
-                          errorStyle: TextStyle(color: Colors.red),
+                          errorStyle: const TextStyle(color: Colors.red),
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -139,24 +146,28 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
                       // Phone Number Field
                       TextFormField(
                         controller: _phoneController,
-                        style: const TextStyle(color: Colors.black),
+                        style: const TextStyle(color: AppColors.primaryText),
                         keyboardType: TextInputType.number,
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly
                         ],
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           hintText: 'Phone Number',
-                          hintStyle: TextStyle(color: Colors.black54),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black),
+                          hintStyle: TextStyle(
+                              color: AppColors.primaryText.withOpacity(0.5)),
+                          border: const OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: AppColors.borderColor),
                           ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black),
+                          enabledBorder: const OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: AppColors.borderColor),
                           ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black),
+                          focusedBorder: const OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: AppColors.borderColor),
                           ),
-                          errorStyle: TextStyle(color: Colors.red),
+                          errorStyle: const TextStyle(color: Colors.red),
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -176,7 +187,7 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                          color: AppColors.primaryText,
                         ),
                       ),
                       const SizedBox(height: 8),
@@ -185,7 +196,8 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
                           Radio(
                             value: 'Male',
                             groupValue: _selectedGender,
-                            fillColor: WidgetStateProperty.all(Colors.black),
+                            fillColor:
+                                WidgetStateProperty.all(AppColors.primaryText),
                             onChanged: (value) {
                               setState(() {
                                 _selectedGender = value.toString();
@@ -193,12 +205,13 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
                             },
                           ),
                           const Text('Male',
-                              style: TextStyle(color: Colors.black)),
+                              style: TextStyle(color: AppColors.primaryText)),
                           const SizedBox(width: 16),
                           Radio(
                             value: 'Female',
                             groupValue: _selectedGender,
-                            fillColor: WidgetStateProperty.all(Colors.black),
+                            fillColor:
+                                WidgetStateProperty.all(AppColors.primaryText),
                             onChanged: (value) {
                               setState(() {
                                 _selectedGender = value.toString();
@@ -206,12 +219,13 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
                             },
                           ),
                           const Text('Female',
-                              style: TextStyle(color: Colors.black)),
+                              style: TextStyle(color: AppColors.primaryText)),
                           const SizedBox(width: 16),
                           Radio(
                             value: 'Other',
                             groupValue: _selectedGender,
-                            fillColor: WidgetStateProperty.all(Colors.black),
+                            fillColor:
+                                WidgetStateProperty.all(AppColors.primaryText),
                             onChanged: (value) {
                               setState(() {
                                 _selectedGender = value.toString();
@@ -219,7 +233,7 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
                             },
                           ),
                           const Text('Other',
-                              style: TextStyle(color: Colors.black)),
+                              style: TextStyle(color: AppColors.primaryText)),
                         ],
                       ),
                     ],
@@ -234,16 +248,15 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
                   child: ElevatedButton(
                     onPressed: _submitForm,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.mediumBlue,
-                      side: const BorderSide(color: Colors.black),
+                      backgroundColor: AppColors.primary,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(8),
                       ),
                     ),
                     child: const Text(
                       'Submit',
                       style: TextStyle(
-                        color: Colors.black,
+                        color: AppColors.primaryText,
                         fontSize: 16,
                       ),
                     ),

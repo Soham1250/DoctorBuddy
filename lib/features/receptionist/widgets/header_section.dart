@@ -16,7 +16,7 @@ class HeaderSection extends StatelessWidget {
       decoration: const BoxDecoration(
         border: Border(
           bottom: BorderSide(
-            color: AppColors.buttonBorder,
+            color: AppColors.borderColor,
             width: 1,
           ),
         ),
@@ -29,14 +29,14 @@ class HeaderSection extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: Colors.black,
+                color: AppColors.borderColor,
                 width: 1,
               ),
             ),
             child: Icon(
               Icons.person_outline,
               size: 30,
-              color: Colors.grey.shade700,
+              color: AppColors.secondaryText,
             ),
           ),
           const SizedBox(width: 16),
@@ -49,7 +49,7 @@ class HeaderSection extends StatelessWidget {
               'Hello $username',
               style: const TextStyle(
                 fontSize: 24,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.bold,
                 color: AppColors.primaryText,
               ),
             ),
