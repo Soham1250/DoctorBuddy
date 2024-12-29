@@ -52,29 +52,30 @@ class _MakeAppointmentScreenState extends State<MakeAppointmentScreen> {
       initialTime: TimeOfDay.now(),
       builder: (context, child) {
         return Theme(
-          data: Theme.of(context).copyWith(
-            timePickerTheme: TimePickerThemeData(
-              backgroundColor: AppColors.background,
-              hourMinuteShape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-                side: BorderSide(color: AppColors.borderColor),
+            data: Theme.of(context).copyWith(
+              timePickerTheme: TimePickerThemeData(
+                backgroundColor: AppColors.background,
+                hourMinuteShape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  side: const BorderSide(color: AppColors.borderColor),
+                ),
+                dayPeriodBorderSide:
+                    const BorderSide(color: AppColors.borderColor),
+                dayPeriodShape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  side: const BorderSide(color: AppColors.borderColor),
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  side: const BorderSide(color: AppColors.borderColor),
+                ),
               ),
-              dayPeriodBorderSide: BorderSide(color: AppColors.borderColor),
-              dayPeriodShape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-                side: BorderSide(color: AppColors.borderColor),
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-                side: BorderSide(color: AppColors.borderColor),
+              textButtonTheme: TextButtonThemeData(
+                style: TextButton.styleFrom(
+                    foregroundColor: AppColors.secondaryText),
               ),
             ),
-            textButtonTheme: TextButtonThemeData(
-              style: TextButton.styleFrom(foregroundColor: Colors.black),
-            ),
-          ),
-          child: child!,
-        );
+            child: child!);
       },
     );
 
@@ -185,7 +186,7 @@ class _MakeAppointmentScreenState extends State<MakeAppointmentScreen> {
                     onPressed: _searchPatient,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.background,
-                      side: BorderSide(color: AppColors.borderColor),
+                      side: const BorderSide(color: AppColors.borderColor),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
@@ -234,7 +235,8 @@ class _MakeAppointmentScreenState extends State<MakeAppointmentScreen> {
                             ),
                             Text(
                               e.value,
-                              style: const TextStyle(color: AppColors.primaryText),
+                              style:
+                                  const TextStyle(color: AppColors.primaryText),
                             ),
                           ],
                         ),
@@ -276,7 +278,7 @@ class _MakeAppointmentScreenState extends State<MakeAppointmentScreen> {
                       onPressed: () => _selectTime(context),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.background,
-                        side: BorderSide(color: AppColors.borderColor),
+                        side: const BorderSide(color: AppColors.borderColor),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
@@ -297,7 +299,7 @@ class _MakeAppointmentScreenState extends State<MakeAppointmentScreen> {
                   onPressed: _createAppointment,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.background,
-                    side: BorderSide(color: AppColors.borderColor),
+                    side: const BorderSide(color: AppColors.borderColor),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),

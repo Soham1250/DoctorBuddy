@@ -11,43 +11,12 @@ class SearchPatientScreen extends StatefulWidget {
 class _SearchPatientScreenState extends State<SearchPatientScreen> {
   final TextEditingController _searchController = TextEditingController();
   bool _patientFound = false;
-  Map<String, String>? _patientDetails;
 
   void _searchPatient() {
-    if (_searchController.text.toLowerCase() == 'john doe') {
-      setState(() {
-        _patientFound = true;
-        _patientDetails = {
-          'Gender': 'Male',
-          'Age': '45',
-          'Last visited': '15 Jan 2024',
-          'Brief history': 'Regular checkups, No major conditions',
-          'Contact': '+1 234-567-8900',
-          'Email': 'john.doe@email.com',
-          'Address': '123 Medical Street, Health City',
-          'Insurance': 'HealthCare Plus - Premium',
-          'Blood Group': 'O+',
-          'Allergies': 'None reported',
-        };
-      });
-    } else {
-      setState(() {
-        _patientFound = false;
-        _patientDetails = null;
-      });
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Patient not found'),
-          backgroundColor: AppColors.background,
-        ),
-      );
-    }
-  }
-
-  @override
-  void dispose() {
-    _searchController.dispose();
-    super.dispose();
+    // TODO: Implement actual search
+    setState(() {
+      _patientFound = true;
+    });
   }
 
   @override
@@ -55,10 +24,10 @@ class _SearchPatientScreenState extends State<SearchPatientScreen> {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        backgroundColor: AppColors.surface,
+        backgroundColor: AppColors.background,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: AppColors.primaryText),
           onPressed: () => Navigator.pop(context),
         ),
         title: const Text(
@@ -66,104 +35,142 @@ class _SearchPatientScreenState extends State<SearchPatientScreen> {
           style: TextStyle(color: AppColors.primaryText),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            // Search Section
+            // Search Box
             Container(
               padding: const EdgeInsets.all(16),
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 color: AppColors.surface,
-                border: Border(
-                  bottom: BorderSide(color: AppColors.borderColor),
-                ),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: AppColors.borderColor),
               ),
-              child: TextField(
-                controller: _searchController,
-                style: const TextStyle(color: AppColors.primaryText),
-                decoration: InputDecoration(
-                  hintText: 'Enter Patient Name',
-                  hintStyle: const TextStyle(color: AppColors.secondaryText),
-                  prefixIcon:
-                      const Icon(Icons.search, color: AppColors.secondaryText),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide: const BorderSide(color: AppColors.borderColor),
+              child: Column(
+                children: [
+                  TextField(
+                    controller: _searchController,
+                    style: const TextStyle(
+                      color: AppColors.primaryText,
+                      fontSize: 16,
+                    ),
+                    decoration: const InputDecoration(
+                      hintText: 'Enter Patient Name or Phone Number',
+                      hintStyle: TextStyle(color: AppColors.secondaryText),
+                      prefixIcon: Icon(Icons.search, color: AppColors.icons),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: AppColors.borderColor),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: AppColors.borderColor),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: AppColors.primary),
+                      ),
+                    ),
                   ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide: const BorderSide(color: AppColors.borderColor),
+                  const SizedBox(height: 16),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 50,
+                    child: ElevatedButton(
+                      onPressed: _searchPatient,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.primary,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      child: const Text(
+                        'Search',
+                        style: TextStyle(
+                          color: AppColors.primaryText,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide: const BorderSide(color: AppColors.primary),
-                  ),
-                  filled: true,
-                  fillColor: AppColors.cardColor,
-                ),
-                onChanged: (value) {
-                  // Implement search functionality
-                },
+                ],
               ),
             ),
+
             const SizedBox(height: 24),
 
-            // Details Section
-            Expanded(
-              child: Container(
+            // Results Section
+            if (_patientFound) ...[
+              Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   color: AppColors.surface,
+                  borderRadius: BorderRadius.circular(8),
                   border: Border.all(color: AppColors.borderColor),
-                  borderRadius: BorderRadius.circular(12),
                 ),
-                child: _patientFound
-                    ? SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: _patientDetails!.entries.map((entry) {
-                            return Padding(
-                              padding: const EdgeInsets.only(bottom: 16),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    entry.key,
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                      color: AppColors.primaryText,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 4),
-                                  Text(
-                                    entry.value,
-                                    style: const TextStyle(
-                                      fontSize: 16,
-                                      color: AppColors.primaryText,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          }).toList(),
-                        ),
-                      )
-                    : const Center(
-                        child: Text(
-                          'Patient details will appear here',
-                          style: TextStyle(
-                            color: AppColors.secondaryText,
-                            fontSize: 16,
-                          ),
-                        ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Patient Details',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.primaryText,
                       ),
+                    ),
+                    const SizedBox(height: 16),
+                    _buildDetailRow('Name', 'John Doe'),
+                    _buildDetailRow('Age', '30'),
+                    _buildDetailRow('Gender', 'Male'),
+                    _buildDetailRow('Phone', '+1234567890'),
+                  ],
+                ),
               ),
-            ),
+            ] else
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: AppColors.surface,
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: AppColors.borderColor),
+                ),
+                child: const Text(
+                  'Search results will appear here',
+                  style: TextStyle(
+                    color: AppColors.secondaryText,
+                    fontSize: 16,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildDetailRow(String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Row(
+        children: [
+          Text(
+            '$label: ',
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+              color: AppColors.primaryText,
+            ),
+          ),
+          Text(
+            value,
+            style: const TextStyle(
+              fontSize: 16,
+              color: AppColors.secondaryText,
+            ),
+          ),
+        ],
       ),
     );
   }

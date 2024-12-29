@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 // import '../../../../core/responsive/responsive_layout.dart';
 import '../../../../core/theme/app_colors.dart';
-import '../../../receptionist/screens/login_screen.dart';
+import '../../../receptionist/screens/receptionist_login_screen.dart';
 import 'mobile_layout.dart';
 import 'tablet_layout.dart';
 import '../../../doctor/screens/login/doctor_login_screen.dart';

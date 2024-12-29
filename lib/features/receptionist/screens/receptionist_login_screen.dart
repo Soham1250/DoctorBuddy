@@ -67,14 +67,14 @@ class _ReceptionistLoginScreenState extends State<ReceptionistLoginScreen> {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: Colors.black,
+                      color: AppColors.borderColor,
                       width: 1,
                     ),
                   ),
                   child: const Icon(
                     Icons.person_outline,
                     size: 70,
-                    color: Colors.black,
+                    color: AppColors.icons,
                   ),
                 ),
                 const SizedBox(height: 48),
@@ -122,6 +122,10 @@ class _ReceptionistLoginScreenState extends State<ReceptionistLoginScreen> {
                           backgroundColor: Theme.of(context).primaryColor,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
+                            side: const BorderSide(
+                              color: AppColors.borderColor,
+                              width: 1,
+                            ),
                           ),
                           elevation: 0,
                         ),

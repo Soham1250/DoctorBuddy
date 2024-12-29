@@ -115,7 +115,7 @@ class _ReceptionistMainScreenState extends State<ReceptionistMainScreen> {
                     SnackBar(
                       content: Text(
                           'Appointments for $currentDate saved successfully!'),
-                      backgroundColor: AppColors.background,
+                      backgroundColor: AppColors.success,
                       duration: const Duration(milliseconds: 700),
                     ),
                   );
