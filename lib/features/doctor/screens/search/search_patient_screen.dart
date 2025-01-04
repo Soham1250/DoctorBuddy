@@ -5,7 +5,8 @@ class DoctorSearchPatientScreen extends StatefulWidget {
   const DoctorSearchPatientScreen({super.key});
 
   @override
-  State<DoctorSearchPatientScreen> createState() => _DoctorSearchPatientScreenState();
+  State<DoctorSearchPatientScreen> createState() =>
+      _DoctorSearchPatientScreenState();
 }
 
 class _DoctorSearchPatientScreenState extends State<DoctorSearchPatientScreen> {
@@ -81,18 +82,12 @@ class _DoctorSearchPatientScreenState extends State<DoctorSearchPatientScreen> {
                       const Divider(),
                       _buildDetailRow('Gender:', _patient!.gender),
                       _buildDetailRow('Age:', '${_patient!.age} years'),
-                      _buildDetailRow(
-                        'Last Visited:',
-                        '${_patient!.lastVisited.day}/${_patient!.lastVisited.month}/${_patient!.lastVisited.year}',
-                      ),
                       const SizedBox(height: 8),
                       Text(
                         'Medical History:',
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                       const SizedBox(height: 4),
-                      Text(_patient!.detailedHistory),
-                      const SizedBox(height: 16),
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
