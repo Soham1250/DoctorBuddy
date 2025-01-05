@@ -1,7 +1,9 @@
 // ignore_for_file: use_build_context_synchronously
+import 'package:doctorbuddy/features/doctor/widgets/drawing/paged_drawing_canvas.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter_drawing_board/flutter_drawing_board.dart';
+import 'package:flutter_drawing_board/flutter_drawing_board.dart'
+    show DrawingController;
 import '../../../../core/theme/app_colors.dart';
 import '../../models/patient.dart';
 
@@ -35,10 +37,7 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
       final image = await _drawingController.getImageData();
 
       // TODO: Save the image to storage and get URL
-      const imageUrl =
-          "dummy_url"; // Replace with actual image URL after saving
-
-      // Call the callback to mark appointment as complete
+      const imageUrl = "dummy_url";
       widget.onAppointmentComplete(imageUrl);
 
       ScaffoldMessenger.of(context).showSnackBar(
@@ -47,7 +46,6 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
           backgroundColor: AppColors.success,
         ),
       );
-
       Navigator.pop(context);
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -78,12 +76,6 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
           widget.patient.name,
           style: const TextStyle(color: AppColors.primaryText),
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh, color: AppColors.primaryText),
-            onPressed: () => _drawingController.clear(),
-          ),
-        ],
       ),
       body: Column(
         children: [
@@ -111,7 +103,7 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
             ),
           ),
 
-          // Drawing Board Section
+          // Drawing Canvas Section
           Expanded(
             child: Container(
               margin: const EdgeInsets.all(16),
@@ -119,25 +111,20 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(color: AppColors.borderColor),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 4,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: DrawingBoard(
+                child: PagedDrawingCanvas(
                   controller: _drawingController,
-                  background: Container(
-                    color: Colors.white,
-                    child: const Center(
-                      child: Text(
-                        'Write notes here',
-                        style: TextStyle(
-                          color: AppColors.secondaryText,
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
-                  ),
-                  showDefaultActions: false,
-                  showDefaultTools: true,
+                  backgroundColor: Colors.white,
+                  placeholder: 'Write notes here',
                 ),
               ),
             ),
@@ -155,21 +142,16 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                   backgroundColor: AppColors.primary,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
-                    side: const BorderSide(
-                      color: AppColors.borderColor,
-                      width: 1,
-                    ),
                   ),
                 ),
                 child: _isSaving
                     ? const CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                            AppColors.primaryText),
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                       )
                     : const Text(
                         'Done',
                         style: TextStyle(
-                          color: AppColors.primaryText,
+                          color: Colors.white,
                           fontSize: 16,
                         ),
                       ),
