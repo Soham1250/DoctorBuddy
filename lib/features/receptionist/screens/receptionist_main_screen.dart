@@ -6,7 +6,6 @@ import '../models/daily_record.dart';
 import '../widgets/appointment_list.dart';
 import '../widgets/bottom_navigation.dart';
 import '../widgets/header_section.dart';
-import '../services/daily_record_service.dart';
 import 'make_appointment_screen.dart';
 import 'search_patient_screen.dart';
 import 'add_patient_screen.dart';

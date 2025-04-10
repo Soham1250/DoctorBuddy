@@ -40,7 +40,8 @@ class _MakeAppointmentScreenState extends State<MakeAppointmentScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Patient not found'),
-          backgroundColor: Colors.red,
+          backgroundColor: AppColors.error,
+          duration: Duration(seconds: 2),
         ),
       );
     }
@@ -54,7 +55,14 @@ class _MakeAppointmentScreenState extends State<MakeAppointmentScreen> {
         return Theme(
             data: Theme.of(context).copyWith(
               timePickerTheme: TimePickerThemeData(
-                backgroundColor: AppColors.background,
+                backgroundColor: AppColors.surface,
+                hourMinuteColor: AppColors.primary.withOpacity(0.1),
+                hourMinuteTextColor: AppColors.primaryText,
+                dayPeriodTextColor: AppColors.primaryText,
+                dialHandColor: AppColors.primary,
+                dialBackgroundColor: AppColors.background,
+                dialTextColor: AppColors.primaryText,
+                entryModeIconColor: AppColors.primaryText,
                 hourMinuteShape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                   side: const BorderSide(color: AppColors.borderColor),
@@ -72,7 +80,7 @@ class _MakeAppointmentScreenState extends State<MakeAppointmentScreen> {
               ),
               textButtonTheme: TextButtonThemeData(
                 style: TextButton.styleFrom(
-                    foregroundColor: AppColors.secondaryText),
+                    foregroundColor: AppColors.accentBlue),
               ),
             ),
             child: child!);
@@ -92,7 +100,8 @@ class _MakeAppointmentScreenState extends State<MakeAppointmentScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Please search for a patient first'),
-          backgroundColor: Colors.red,
+          backgroundColor: AppColors.error,
+          duration: Duration(seconds: 2),
         ),
       );
       return;
@@ -102,7 +111,8 @@ class _MakeAppointmentScreenState extends State<MakeAppointmentScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Please select appointment time'),
-          backgroundColor: Colors.red,
+          backgroundColor: AppColors.error,
+          duration: Duration(seconds: 2),
         ),
       );
       return;
@@ -119,8 +129,8 @@ class _MakeAppointmentScreenState extends State<MakeAppointmentScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('Appointment created successfully'),
-        duration: Duration(milliseconds: 700),
-        backgroundColor: Colors.green,
+        duration: Duration(seconds: 1),
+        backgroundColor: AppColors.success,
       ),
     );
 
@@ -139,91 +149,151 @@ class _MakeAppointmentScreenState extends State<MakeAppointmentScreen> {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        backgroundColor: AppColors.background,
+        backgroundColor: AppColors.surface,
         elevation: 0,
+        title: const Text(
+          'Schedule Appointment',
+          style: TextStyle(
+            color: AppColors.primaryText,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: AppColors.primaryText),
           onPressed: () => Navigator.pop(context),
         ),
-        title: const Text(
-          'Make Appointment',
-          style: TextStyle(color: AppColors.primaryText),
-        ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Search Section
+            // Search Patient Section
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: AppColors.background,
-                border: Border.all(color: AppColors.borderColor),
+                color: AppColors.surface,
                 borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 4,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
               ),
-              child: Row(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(
-                    child: TextField(
-                      controller: _searchController,
-                      style: const TextStyle(
-                        color: AppColors.primaryText,
-                        fontSize: 16,
-                      ),
-                      decoration: const InputDecoration(
-                        hintText: 'Enter Patient Name',
-                        border: InputBorder.none,
-                        hintStyle: TextStyle(
-                          color: AppColors.secondaryText,
-                        ),
-                      ),
+                  const Text(
+                    'Patient Search',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.primaryText,
                     ),
                   ),
-                  const SizedBox(width: 16),
-                  ElevatedButton(
-                    onPressed: _searchPatient,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.background,
-                      side: const BorderSide(color: AppColors.borderColor),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                  const SizedBox(height: 16),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          controller: _searchController,
+                          style: const TextStyle(
+                            color: AppColors.primaryText,
+                          ),
+                          decoration: InputDecoration(
+                            hintText: 'Search patient by name',
+                            hintStyle: TextStyle(
+                              color: AppColors.secondaryText,
+                            ),
+                            prefixIcon: const Icon(
+                              Icons.search,
+                              color: AppColors.accentBlue,
+                            ),
+                            filled: true,
+                            fillColor: AppColors.background,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: BorderSide.none,
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 12,
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                    child: const Text(
-                      'Search',
-                      style: TextStyle(color: AppColors.primaryText),
-                    ),
+                      const SizedBox(width: 12),
+                      ElevatedButton(
+                        onPressed: _searchPatient,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.primary,
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 12,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        child: const Text('Search'),
+                      ),
+                    ],
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: 16),
+            
             if (_patientFound) ...[
+              const SizedBox(height: 24),
               // Patient Details
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: AppColors.background,
-                  border: Border.all(color: AppColors.borderColor),
+                  color: AppColors.surface,
                   borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      blurRadius: 4,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'Patient Details',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.primaryText,
-                      ),
+                    Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: AppColors.primary.withOpacity(0.1),
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Icon(
+                            Icons.person,
+                            color: AppColors.primary,
+                            size: 24,
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        const Text(
+                          'Patient Details',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.primaryText,
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 16),
                     ..._patientDetails!.entries.map(
                       (e) => Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 4),
+                        padding: const EdgeInsets.symmetric(vertical: 6),
                         child: Row(
                           children: [
                             Text(
@@ -235,8 +305,9 @@ class _MakeAppointmentScreenState extends State<MakeAppointmentScreen> {
                             ),
                             Text(
                               e.value,
-                              style:
-                                  const TextStyle(color: AppColors.primaryText),
+                              style: const TextStyle(
+                                color: AppColors.primaryText,
+                              ),
                             ),
                           ],
                         ),
@@ -245,48 +316,91 @@ class _MakeAppointmentScreenState extends State<MakeAppointmentScreen> {
                   ],
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 24),
               // Time Selection
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: AppColors.background,
-                  border: Border.all(color: AppColors.borderColor),
+                  color: AppColors.surface,
                   borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      blurRadius: 4,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
                 ),
-                child: Row(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      child: TextField(
-                        controller: _timeController,
-                        readOnly: true,
-                        style: const TextStyle(
-                          color: AppColors.primaryText,
-                          fontSize: 16,
+                    const Row(
+                      children: [
+                        Icon(
+                          Icons.access_time,
+                          color: AppColors.primary,
                         ),
-                        decoration: const InputDecoration(
-                          hintText: 'Select Time',
-                          border: InputBorder.none,
-                          hintStyle: TextStyle(
-                            color: AppColors.secondaryText,
+                        SizedBox(width: 8),
+                        Text(
+                          'Appointment Time',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.primaryText,
                           ),
                         ),
-                      ),
+                      ],
                     ),
-                    const SizedBox(width: 16),
-                    ElevatedButton(
-                      onPressed: () => _selectTime(context),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.background,
-                        side: const BorderSide(color: AppColors.borderColor),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TextField(
+                            controller: _timeController,
+                            readOnly: true,
+                            style: const TextStyle(
+                              color: AppColors.primaryText,
+                              fontSize: 16,
+                            ),
+                            decoration: InputDecoration(
+                              hintText: 'Select Time',
+                              hintStyle: const TextStyle(
+                                color: AppColors.secondaryText,
+                              ),
+                              filled: true,
+                              fillColor: AppColors.background,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide.none,
+                              ),
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 12,
+                              ),
+                              prefixIcon: const Icon(
+                                Icons.schedule,
+                                color: AppColors.accentBlue,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                      child: const Text(
-                        'Pick Time',
-                        style: TextStyle(color: AppColors.primaryText),
-                      ),
+                        const SizedBox(width: 12),
+                        ElevatedButton(
+                          onPressed: () => _selectTime(context),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.primary,
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 12,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          child: const Text('Pick Time'),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -294,22 +408,31 @@ class _MakeAppointmentScreenState extends State<MakeAppointmentScreen> {
               const SizedBox(height: 32),
               // Create Appointment Button
               SizedBox(
+                width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
                   onPressed: _createAppointment,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.background,
-                    side: const BorderSide(color: AppColors.borderColor),
+                    backgroundColor: AppColors.primary,
+                    foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
+                    elevation: 2,
                   ),
-                  child: const Text(
-                    'Create Appointment',
-                    style: TextStyle(
-                      color: AppColors.primaryText,
-                      fontSize: 16,
-                    ),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.calendar_today),
+                      SizedBox(width: 8),
+                      Text(
+                        'Create Appointment',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
