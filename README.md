@@ -15,6 +15,10 @@
 
 DoctorBuddy is a Flutter-based application designed to streamline clinic management by providing separate interfaces for doctors and receptionists. The app facilitates patient management, appointment scheduling, medical note-taking, and record-keeping in a user-friendly environment.
 
+> **⚠️ Learning Project Notice**
+> 
+> This project was developed as a learning exercise to practice Flutter development and UI design. Currently, only the frontend UI is implemented without backend integration or data persistence. All data shown is static and for demonstration purposes only.
+
 ## ✨ Key Features
 
 - 🔐 **Role-Based Access**: Separate interfaces for doctors and receptionists
@@ -125,6 +129,8 @@ lib/
 
 ## 🔮 Future Enhancements
 
+- 🔄 **Backend Integration**: Connect to a real database and API
+- 💾 **Data Persistence**: Store and retrieve real patient and appointment data
 - 🔄 **Sync Capabilities**: Cloud synchronization for multi-device access
 - 📊 **Analytics Dashboard**: Insights on patient visits and clinic performance
 - 🔔 **Notifications**: Appointment reminders for staff and patients
